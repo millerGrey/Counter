@@ -1,9 +1,11 @@
 <resources>
     <string name="app_name">Counter</string>
-    <string name="tab_text_1">Tab 1</string>
+    <string name="expences">Расходы</string>
     <string name="tab_text_2">Tab 2</string>
 
     <string name="name">Название</string>
     <string name="enterName">Введите название</string>
+    <string name="coast">Стоимость</string>
+    <string name="enterCoast">Введите стоимость</string>
     <string name="save">Сохранить</string>
 </resources>
