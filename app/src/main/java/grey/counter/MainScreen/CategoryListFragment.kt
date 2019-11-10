@@ -20,6 +20,10 @@ import grey.counter.CategoryListViewModel
 import grey.counter.R
 import grey.counter.databinding.FragmentCategoryListBinding
 import grey.counter.databinding.ItemCategoryBinding
+import androidx.databinding.BindingAdapter
+import grey.counter.CategoryListBindings
+import grey.counter.RecyclerAdapter
+import java.util.ArrayList
 
 
 class CategoryListFragment: Fragment() {
@@ -41,75 +45,19 @@ class CategoryListFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         Log.d("RV","listfrag onCreateView")
-        viewBinding = FragmentCategoryListBinding.inflate(inflater, container, false).apply {
-//            viewModel = (activity as MainActivity).getVM()
-        }
+
+        val listBinding = FragmentCategoryListBinding.inflate(inflater, container, false)
         categoryListViewModel = (activity as MainActivity).getVM()
-        val adapter = RecyclerAdapter(categoryListViewModel)
+        listBinding.vm = categoryListViewModel
+        listBinding.myRecycler.adapter = RecyclerAdapter(listBinding.vm)
+        listBinding.myRecycler.layoutManager = LinearLayoutManager(activity)
 
-        viewBinding.myRecycler.adapter = adapter
-        viewBinding.myRecycler.layoutManager = LinearLayoutManager(activity)
-        categoryListViewModel?.getListCategory()?.observe(this, Observer {
-            Log.d("RV","getList ${it.toString()}")
-            adapter.refresh(it)
-        })
-
-        viewBinding.fab.setOnClickListener {
+        listBinding.fab.setOnClickListener(){
             categoryListViewModel?.newCategory()
         }
-        return viewBinding.root
+
+
+        return listBinding.root
     }
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
-
-    class RecyclerAdapter(
-        val categoryListViewModel: CategoryListViewModel?
-    ) : RecyclerView.Adapter<ViewHolder>() {
-        private var list: List<Category> = ArrayList()
-        private lateinit var itemBinding: ItemCategoryBinding
-        init {
-            Log.d("RV", "init Adapter ${list.size}")
-        }
-
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-            Log.d("RV","onCreateVH")
-            itemBinding = DataBindingUtil.inflate(
-                LayoutInflater.from(parent.context),
-                R.layout.item_category,
-                parent,
-                false
-            )
-            return ViewHolder(itemBinding.root)
-        }
-
-        override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-            val userActionListener = object : ItemClickListener {
-                override fun onClick() {
-//                    listener(position)
-                    Log.d("RV","+press ${position}")
-                    categoryListViewModel?.openCategory(position)
-                }
-            }
-            Log.d("RV","onBindVH ${position} ${itemBinding.itemName.text.toString()}")
-            with(itemBinding) {
-                category = list[position]
-                listener = userActionListener
-                executePendingBindings()
-            }
-            Log.d("RV","onBindVH ${position} ${itemBinding.itemName.text.toString()}")
-            Log.d("RV","onBindVH ${itemBinding.category}")
-        }
-
-
-        override fun getItemCount(): Int {
-            return list.size
-        }
-
-        fun refresh(lst: List<Category>){
-            Log.d("RV","oldList ${list.toString()}")
-            Log.d("RV","newList ${lst.toString()}")
-            list = lst
-            notifyDataSetChanged()
-        }
-    }
 }

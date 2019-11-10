@@ -4,8 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <import type="android.view.View" />
+
+        <import type="androidx.core.content.ContextCompat" />
         <variable
-            name="viewModel"
+            name="vm"
             type="grey.counter.CategoryListViewModel" />
     </data>
 
@@ -17,7 +20,8 @@
             android:id="@+id/myRecycler"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:listitem="@layout/item_category">
+            tools:listitem="@layout/item_category"
+            app:items="@{vm.categoryList}">
 
         </androidx.recyclerview.widget.RecyclerView>
 

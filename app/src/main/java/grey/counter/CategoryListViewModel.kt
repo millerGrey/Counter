@@ -22,9 +22,14 @@ class CategoryListViewModel(
     val newCategoryEvent:  LiveData<Int>
         get() = _newCategoryEvent
 
-
-
     var categoryList: MutableLiveData<List<Category>> = MutableLiveData()
+
+
+    private val _items = MutableLiveData<List<Category>>().apply { value = emptyList() }
+    val items: LiveData<List<Category>>
+        get() = _items
+
+
 
     init{
        refreshCat()
