@@ -24,14 +24,14 @@ import grey.counter.databinding.ItemCategoryBinding
 
 class CategoryListFragment: Fragment() {
 
-//    private val categoryListViewModel  by lazy{ ViewModelProviders.of(this).get(CategoryListViewModel::class.java) }
+    private lateinit var categoryListViewModel : CategoryListViewModel
 
     private lateinit var viewBinding:FragmentCategoryListBinding
 
     override fun onResume() {
         super.onResume()
-        viewBinding.viewModel?.refreshCat()
-        Log.d("RV","onResume")
+        Log.d("RV","listfrag onResume")
+        categoryListViewModel?.refreshCat()
     }
 
 
@@ -40,21 +40,22 @@ class CategoryListFragment: Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
+        Log.d("RV","listfrag onCreateView")
         viewBinding = FragmentCategoryListBinding.inflate(inflater, container, false).apply {
-            viewModel = (activity as MainActivity).getVM()
+//            viewModel = (activity as MainActivity).getVM()
         }
-
-        val adapter = RecyclerAdapter(::openCategory, viewBinding.viewModel)
+        categoryListViewModel = (activity as MainActivity).getVM()
+        val adapter = RecyclerAdapter(categoryListViewModel)
 
         viewBinding.myRecycler.adapter = adapter
         viewBinding.myRecycler.layoutManager = LinearLayoutManager(activity)
-        viewBinding.viewModel?.getListCategory()?.observe(this, Observer {
+        categoryListViewModel?.getListCategory()?.observe(this, Observer {
+            Log.d("RV","getList ${it.toString()}")
             adapter.refresh(it)
         })
 
         viewBinding.fab.setOnClickListener {
-            viewBinding.viewModel?.newCategory()
+            categoryListViewModel?.newCategory()
         }
         return viewBinding.root
     }
@@ -62,7 +63,6 @@ class CategoryListFragment: Fragment() {
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
     class RecyclerAdapter(
-        val listener: (Int) -> Unit,
         val categoryListViewModel: CategoryListViewModel?
     ) : RecyclerView.Adapter<ViewHolder>() {
         private var list: List<Category> = ArrayList()
@@ -79,42 +79,37 @@ class CategoryListFragment: Fragment() {
                 parent,
                 false
             )
-
             return ViewHolder(itemBinding.root)
         }
 
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-            Log.d("RV","onBindVH")
             val userActionListener = object : ItemClickListener {
                 override fun onClick() {
 //                    listener(position)
-                    categoryListViewModel?.openCategory(position+1)
+                    Log.d("RV","+press ${position}")
+                    categoryListViewModel?.openCategory(position)
                 }
             }
+            Log.d("RV","onBindVH ${position} ${itemBinding.itemName.text.toString()}")
             with(itemBinding) {
                 category = list[position]
                 listener = userActionListener
                 executePendingBindings()
             }
+            Log.d("RV","onBindVH ${position} ${itemBinding.itemName.text.toString()}")
+            Log.d("RV","onBindVH ${itemBinding.category}")
         }
 
 
         override fun getItemCount(): Int {
-//            Log.d("RV","getItemCount ${list.size}")
             return list.size
         }
 
-        fun refresh(list: List<Category>){
-//            Log.d("RV","refresh ${list.size}")
-            this.list = list
-
+        fun refresh(lst: List<Category>){
+            Log.d("RV","oldList ${list.toString()}")
+            Log.d("RV","newList ${lst.toString()}")
+            list = lst
             notifyDataSetChanged()
         }
     }
-
-    fun openCategory(pos: Int){
-        val intent = Intent(activity, CategoryActivity::class.java)
-        startActivity(intent)
-    }
-
 }

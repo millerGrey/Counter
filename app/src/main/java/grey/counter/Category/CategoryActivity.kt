@@ -10,7 +10,7 @@ class CategoryActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_category)
-        val id = intent.getIntExtra("id",0)
+        val id = intent.getIntExtra("id",-1)
         Log.d("RV","getExtra ${id}")
         if(savedInstanceState==null) {
             val f = CategoryFragment().newInstance(id)
@@ -25,3 +25,4 @@ class CategoryActivity: AppCompatActivity() {
 
 
 }
+

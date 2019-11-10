@@ -22,14 +22,10 @@ class CategoryFragment: Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.d("RV","frag onCreate")
-
-        if(arguments?.getInt(ARG_ID)!=null) {
-            categoryViewModel?.start(arguments?.getInt(ARG_ID)!!)
-        }else{
-            categoryViewModel?.start(0)
+        val id =arguments?.getInt(ARG_ID)
+        if(id!=null&& id>=0) {
+            categoryViewModel?.start(id)
         }
-
-
     }
 
     override fun onResume() {
