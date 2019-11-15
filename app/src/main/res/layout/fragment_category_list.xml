@@ -17,7 +17,8 @@
             android:id="@+id/myRecycler"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:listitem="@layout/item_category">
+            tools:listitem="@layout/item_category"
+            >
 
         </androidx.recyclerview.widget.RecyclerView>
 
@@ -31,7 +32,8 @@
             android:layout_marginBottom="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:srcCompat="@drawable/ic_add_black_24dp" />
+            app:srcCompat="@drawable/ic_add_black_24dp"
+            android:onClick="@{()->viewModel.newCategory()}"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

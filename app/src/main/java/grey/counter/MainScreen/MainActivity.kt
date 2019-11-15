@@ -47,15 +47,7 @@ class MainActivity : AppCompatActivity() {
         val tabs: TabLayout = findViewById(R.id.tabs)
         tabs.setupWithViewPager(viewPager)
     }
-//
-//    override fun openTaskDetails(taskId: String) {
-//        val intent = Intent(this, CategoryActivity::class.java).apply {
-////            putExtra(CategoryActivity.EXTRA_TASK_ID, taskId)
-//        }
-//        startActivityForResult(intent, CategoryActivity.REQUEST_CODE)
-//
-//    }
-//
+
     fun addNewCategory() {
         val intent = Intent(this, CategoryActivity::class.java)
         Log.d("RV","newCat")
@@ -67,9 +59,4 @@ class MainActivity : AppCompatActivity() {
         Log.d("RV","OpenCat putExtra ${id}")
         startActivity(intent)
     }
-
-    fun getVM():CategoryListViewModel{
-        return listViewModel
-    }
-
 }

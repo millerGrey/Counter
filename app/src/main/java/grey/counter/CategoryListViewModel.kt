@@ -1,12 +1,9 @@
 package grey.counter
 
-import android.content.Intent
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
-import grey.counter.Category.CategoryActivity
 import grey.counter.source.Category
 import grey.counter.source.CategoryLocalDataSource
 
@@ -22,19 +19,21 @@ class CategoryListViewModel(
     val newCategoryEvent:  LiveData<Int>
         get() = _newCategoryEvent
 
-
-
-    var categoryList: MutableLiveData<List<Category>> = MutableLiveData()
+    private var _categoryList = MutableLiveData<List<Category>>()
+    val categoryList: LiveData<List<Category>>
+        get() =  _categoryList
 
     init{
-       refreshCat()
+//       refreshCat()
+        _categoryList.value = CategoryLocalDataSource.getAllCategories()
     }
-    fun getListCategory() = categoryList
+
 
 
 
     fun refreshCat() {
-        categoryList.value = CategoryLocalDataSource.getAllCategories()
+        Log.d("RV","vieModel refreshList")
+        _categoryList.value = CategoryLocalDataSource.getAllCategories()
     }
 
     fun openCategory(id: Int){

@@ -5,19 +5,15 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import grey.counter.CategoryViewModel
-import grey.counter.R
 import grey.counter.databinding.FragmentCategoryBinding
-import grey.counter.source.Category
-import kotlinx.android.synthetic.main.fragment_category.view.*
 
 class CategoryFragment: Fragment() {
 
-    private val categoryViewModel  by lazy{ ViewModelProviders.of(this).get(CategoryViewModel::class.java) }
+    private val categoryViewModel  by lazy{ ViewModelProviders.of(requireActivity()).get(
+        CategoryViewModel::class.java) }
     private lateinit var categoryBinding: FragmentCategoryBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
