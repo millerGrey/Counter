@@ -1,8 +1,10 @@
 package grey.counter
 
 import android.util.Log
+import android.view.animation.Transformation
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import grey.counter.source.Category
 import grey.counter.source.CategoryLocalDataSource
@@ -23,9 +25,14 @@ class CategoryListViewModel(
     val categoryList: LiveData<List<Category>>
         get() =  _categoryList
 
+    val empty: LiveData<Boolean> = Transformations.map(_categoryList) {
+       it.isEmpty()
+    }
+
+
     init{
-//       refreshCat()
-        _categoryList.value = CategoryLocalDataSource.getAllCategories()
+       refreshCat()
+//        _categoryList.value = CategoryLocalDataSource.getAllCategories()
     }
 
 

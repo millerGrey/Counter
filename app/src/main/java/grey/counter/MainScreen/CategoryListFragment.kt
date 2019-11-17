@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import grey.counter.CategoryListViewModel
@@ -22,11 +21,9 @@ class CategoryListFragment: Fragment() {
     private lateinit var viewBinding:FragmentCategoryListBinding
 
    override fun onResume() {
-        super.onResume()
-        Log.d("RV","listfrag onResume")
+       super.onResume()
        Log.d("RV","resume getList1 ${categoryListViewModel.categoryList.value}")
         categoryListViewModel.refreshCat()
-       Log.d("RV","resume getList2 ${categoryListViewModel.categoryList.value}")
     }
 
 
@@ -45,12 +42,8 @@ class CategoryListFragment: Fragment() {
             viewModel = categoryListViewModel
             myRecycler.adapter = adapter
             myRecycler.layoutManager = LinearLayoutManager(requireActivity())
+            lifecycleOwner = requireActivity()
         }
-
-        categoryListViewModel.categoryList.observe(this, Observer {
-            Log.d("RV","observe getList $it")
-            adapter.refreshList(it)
-        })
         return viewBinding.root
     }
 }

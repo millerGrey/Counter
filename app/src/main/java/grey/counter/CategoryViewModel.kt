@@ -54,5 +54,9 @@ class CategoryViewModel: ViewModel() {
         }
         updateCategory(category.value!!.id!!)
     }
+    fun deleteCategory(){
+
+        CategoryLocalDataSource.deleteCategory(category.value!!)
+    }
 
 }

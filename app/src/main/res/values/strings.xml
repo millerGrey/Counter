@@ -3,6 +3,8 @@
     <string name="expences">Расходы</string>
     <string name="tab_text_2">Tab 2</string>
 
+    <string name="emptyList">Добавьте категорию</string>
+
     <string name="name">Название</string>
     <string name="enterName">Введите название</string>
     <string name="coast">Стоимость</string>

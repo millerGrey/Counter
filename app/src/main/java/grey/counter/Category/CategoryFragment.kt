@@ -37,10 +37,15 @@ class CategoryFragment: Fragment() {
         Log.d("RV","frag onCreateView")
         categoryBinding = FragmentCategoryBinding.inflate(inflater, container, false)
         categoryBinding.viewModel = categoryViewModel
+        categoryBinding.lifecycleOwner = requireActivity()
 
         categoryBinding.fabDone.setOnClickListener{
 
             categoryBinding.viewModel?.saveCategory()
+        }
+        categoryBinding.deleteButton.setOnClickListener(){
+            categoryBinding.viewModel?.deleteCategory()
+            requireActivity().finish()
         }
         return categoryBinding.root
     }
@@ -52,11 +57,11 @@ class CategoryFragment: Fragment() {
         }
         Log.d("RV","newInstance ${id}")
     }
-companion object {
+    companion object {
 
-    val ARG_ID = "arg_id"
+        val ARG_ID = "arg_id"
 
-}
+    }
 
 
 }
