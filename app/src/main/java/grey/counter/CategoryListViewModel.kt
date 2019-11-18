@@ -17,8 +17,8 @@ class CategoryListViewModel(
     val openCategoryEvent: LiveData<Int>
         get() = _openCategoryEvent
 
-    private var _newCategoryEvent = MutableLiveData<Int>()
-    val newCategoryEvent:  LiveData<Int>
+    private var _newCategoryEvent = MutableLiveData<Boolean>()
+    val newCategoryEvent:  LiveData<Boolean>
         get() = _newCategoryEvent
 
     private var _categoryList = MutableLiveData<List<Category>>()
@@ -47,7 +47,10 @@ class CategoryListViewModel(
         _openCategoryEvent.value = id
     }
     fun newCategory(){
-        _newCategoryEvent.value = (categoryList.value?.size)?.plus(1)
+        _newCategoryEvent.value = true
         Log.d("RV","new cat")
+    }
+    fun resultHandler(){
+        _newCategoryEvent.value =false
     }
 }

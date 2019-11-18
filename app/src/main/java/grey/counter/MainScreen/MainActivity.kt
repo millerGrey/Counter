@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity() {
         Log.d("RV"," activity onCreate")
         listViewModel = ViewModelProviders.of(this).get(CategoryListViewModel::class.java)
         listViewModel.newCategoryEvent.observe(this, Observer{
-            if(it!=null){
+            if(it==true){
                 addNewCategory()
             }
         })
@@ -51,12 +51,14 @@ class MainActivity : AppCompatActivity() {
     fun addNewCategory() {
         val intent = Intent(this, CategoryActivity::class.java)
         Log.d("RV","newCat")
+        listViewModel.resultHandler()
         startActivity(intent)
     }
     fun openCategory(id: Int) {
         val intent = Intent(this, CategoryActivity::class.java)
         intent.putExtra("id", id)
         Log.d("RV","OpenCat putExtra ${id}")
+        listViewModel.resultHandler()
         startActivity(intent)
     }
 }

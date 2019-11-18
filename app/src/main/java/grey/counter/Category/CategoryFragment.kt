@@ -42,6 +42,7 @@ class CategoryFragment: Fragment() {
         categoryBinding.fabDone.setOnClickListener{
 
             categoryBinding.viewModel?.saveCategory()
+            requireActivity().finish()
         }
         categoryBinding.deleteButton.setOnClickListener(){
             categoryBinding.viewModel?.deleteCategory()
