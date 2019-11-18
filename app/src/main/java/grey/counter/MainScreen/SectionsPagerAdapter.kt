@@ -7,7 +7,8 @@ import androidx.fragment.app.FragmentPagerAdapter
 import grey.counter.R
 
 private val TAB_TITLES = arrayOf(
-    R.string.expences
+    R.string.expences,
+    R.string.tab_text_2
 )
 
 /**
@@ -20,9 +21,11 @@ class SectionsPagerAdapter(private val context: Context, fm: FragmentManager) :
     override fun getItem(position: Int): Fragment {
         // getItem is called to instantiate the fragment for the given page.
         // Return a PlaceholderFragment (defined as a static inner class below).
-//        if(position==0) {
+        if(position==0) {
             return CategoryListFragment()
-//        }
+        }else{
+            return CalendarFragment()
+        }
     }
 
     override fun getPageTitle(position: Int): CharSequence? {
@@ -31,6 +34,6 @@ class SectionsPagerAdapter(private val context: Context, fm: FragmentManager) :
 
     override fun getCount(): Int {
         // Show 2 total pages.
-        return 1
+        return 2
     }
 }
