@@ -4,11 +4,14 @@ import android.content.Context
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import grey.counter.R
+import java.lang.Exception
 
 private val TAB_TITLES = arrayOf(
     R.string.expences,
-    R.string.tab_text_2
+    R.string.calendar
 )
 
 /**
@@ -17,14 +20,13 @@ private val TAB_TITLES = arrayOf(
  */
 class SectionsPagerAdapter(private val context: Context, fm: FragmentManager) :
     FragmentPagerAdapter(fm) {
-
     override fun getItem(position: Int): Fragment {
         // getItem is called to instantiate the fragment for the given page.
         // Return a PlaceholderFragment (defined as a static inner class below).
-        if(position==0) {
-            return CategoryListFragment()
-        }else{
-            return CalendarFragment()
+        return when(position) {
+            0 -> CategoryListFragment()
+            1 -> CalendarFragment()
+            else->throw Exception()
         }
     }
 
@@ -36,4 +38,6 @@ class SectionsPagerAdapter(private val context: Context, fm: FragmentManager) :
         // Show 2 total pages.
         return 2
     }
+
+
 }

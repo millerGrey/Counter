@@ -3,6 +3,9 @@ package grey.counter.MainScreen
 import android.util.Log
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import grey.counter.CategoryListViewModel
+import grey.counter.R
 import grey.counter.source.Category
 
 object ListBindingAdapter {
@@ -15,3 +18,25 @@ object ListBindingAdapter {
         }
     }
 }
+
+object IconBindingAdapter {
+
+    @BindingAdapter("app:icon","app:action")
+    @JvmStatic fun setItems(fab: FloatingActionButton, pageNum: Int, vm: CategoryListViewModel) {
+        when(pageNum){
+            0->{
+                fab.setImageResource(R.drawable.ic_add_black_24dp)
+                fab.setOnClickListener{
+                            vm.newCategory()
+                }
+            }
+            1-> {
+                fab.setImageResource(R.drawable.ic_edit_black_24dp)
+                fab.setOnClickListener {
+                    vm.refreshCat()
+                }
+            }
+        }
+    }
+}
+

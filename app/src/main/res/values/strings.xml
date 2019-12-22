@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Counter</string>
     <string name="expences">Расходы</string>
-    <string name="tab_text_2">Tab 2</string>
+    <string name="calendar">Календарь</string>
 
     <string name="emptyList">Добавьте категорию</string>
 

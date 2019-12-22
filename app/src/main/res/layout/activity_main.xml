@@ -1,39 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainScreen.MainActivity">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
+    <data>
+        <variable
+            name="viewModel"
+            type="grey.counter.CategoryListViewModel" />
+        <variable
+            name="pageNum"
+            type="Integer" />
+    </data>
 
-        <TextView
-            android:id="@+id/title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:minHeight="?actionBarSize"
-            android:padding="@dimen/appbar_padding"
-            android:text="@string/app_name"
-            android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Title" />
-
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tabs"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="?attr/colorPrimary" />
-    </com.google.android.material.appbar.AppBarLayout>
-
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/view_pager"
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" >
+        tools:context=".MainScreen.MainActivity">
 
-    </androidx.viewpager.widget.ViewPager>
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/AppTheme.AppBarOverlay">
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+<!--                    <TextView-->
+<!--                        android:id="@+id/title"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:gravity="center"-->
+<!--                        android:minHeight="?actionBarSize"-->
+<!--                        android:padding="@dimen/appbar_padding"-->
+<!--                        android:text="@string/app_name"-->
+<!--                        android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Title"-->
+<!--                        app:layout_scrollFlags="scroll|snap"/>-->
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tabs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?attr/colorPrimary" />
+        </com.google.android.material.appbar.AppBarLayout>
+
+<!--        <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+<!--            android:id="@+id/secondButton"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="84dp"-->
+<!--            android:layout_marginEnd="@dimen/fab_margin"-->
+<!--            android:layout_marginBottom="86dp"-->
+<!--            android:clickable="true"-->
+<!--            android:backgroundTint="@android:color/white"-->
+<!--            app:borderWidth="0dp"-->
+<!--            app:layout_anchor="@+id/mainButton"-->
+<!--            app:layout_anchorGravity="top|center"-->
+<!--            app:srcCompat="@drawable/ic_clear_black_24dp" />-->
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+
+        </androidx.viewpager.widget.ViewPager>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/mainButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/fab_margin"
+            android:clickable="true"
+            app:action="@{viewModel}"
+            app:icon="@{pageNum}"
+            app:layout_anchor="@+id/view_pager"
+            app:layout_anchorGravity="end|bottom" />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>
