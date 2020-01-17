@@ -23,6 +23,10 @@
             android:name=".Category.CategoryActivity">
 
         </activity>
+        <activity
+            android:name=".Calculator.CalculatorActivity">
+
+        </activity>
     </application>
 
 </manifest>

@@ -27,13 +27,13 @@ object IconBindingAdapter {
             0->{
                 fab.setImageResource(R.drawable.ic_add_black_24dp)
                 fab.setOnClickListener{
-                            vm.newCategory()
+                    vm.newCategory()
                 }
             }
             1-> {
                 fab.setImageResource(R.drawable.ic_edit_black_24dp)
                 fab.setOnClickListener {
-                    vm.refreshCat()
+                    vm.openDayList()
                 }
             }
         }

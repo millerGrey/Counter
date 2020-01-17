@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import grey.counter.Calculator.CalculatorActivity
 import grey.counter.Category.CategoryActivity
 import grey.counter.CategoryListViewModel
 import grey.counter.R
@@ -41,6 +42,9 @@ class MainActivity : AppCompatActivity() {
         })
         listViewModel.openCategoryEvent.observe(this, Observer {
             openCategory(it)
+        })
+        listViewModel.openDayListEvent.observe(this, Observer {
+            openDayList(it)
         })
         val sectionsPagerAdapter =
             SectionsPagerAdapter(this, supportFragmentManager)
@@ -82,4 +86,10 @@ class MainActivity : AppCompatActivity() {
         listViewModel.resultHandler()
         startActivity(intent)
     }
+    fun openDayList(i: Int){
+
+        startActivity(Intent(this,CalculatorActivity::class.java))
+    }
+
+
 }
