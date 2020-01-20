@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import grey.counter.CategoryListViewModel
+import grey.counter.R
 
 
 import grey.counter.databinding.FragmentCategoryListBinding
@@ -36,7 +37,7 @@ class CategoryListFragment: Fragment() {
         viewBinding = FragmentCategoryListBinding.inflate(inflater, container, false)
         categoryListViewModel = ViewModelProviders.of(requireActivity()).get(CategoryListViewModel::class.java)
 
-        val adapter = CategoryListAdapter(categoryListViewModel)
+        val adapter = CategoryListAdapter(R.layout.item_category, categoryListViewModel)
 
         viewBinding.apply{
             viewModel = categoryListViewModel
