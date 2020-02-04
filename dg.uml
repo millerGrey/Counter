@@ -1,0 +1,42 @@
+@startuml
+
+class MainActivity
+class CategoryListFragment
+class CalendarFragment
+class CategoryListViewModel
+class SectionPagerAdapter
+class CategoryActivity
+class CategoryFragment
+class CalculatorActivity
+class CalculatorFragment
+class CategoryListAdapter
+class Category
+Interface ItemClickListener
+class CategoryViewModel
+
+SectionPagerAdapter <|-- MainActivity
+CategoryListViewModel <|-- MainActivity
+CalendarFragment <|-- SectionPagerAdapter
+CategoryListFragment <|-- SectionPagerAdapter
+CategoryActivity <|-- MainActivity
+CalculatorActivity <|-- MainActivity
+CategoryListAdapter <|-- CategoryListFragment
+CategoryListViewModel <|-- CategoryListFragment
+CategoryListViewModel <|- CategoryListAdapter
+Category <|-- CategoryListAdapter
+ItemClickListener <|-- CategoryListAdapter
+CategoryFragment <|-- CategoryActivity
+CategoryViewModel <|-- CategoryFragment
+Category <|-- CategoryViewModel
+Category <|-- CategoryListViewModel
+CalculatorFragment <|-- CalculatorActivity
+CategoryListAdapter <|--CalculatorFragment
+CategoryListViewModel <|-- CalculatorFragment
+CategoryViewModel <|-- CalculatorFragment
+@enduml
+
+
+
+annotation SuppressWarnings
+
+@enduml
