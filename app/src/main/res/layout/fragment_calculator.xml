@@ -18,7 +18,7 @@
             android:id="@+id/calcRecycler"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:visibility="@{viewModel.empty ? View.GONE : View.VISIBLE}"
+            android:visibility="@{viewModel.isEmpty ? View.GONE : View.VISIBLE}"
             app:items="@{viewModel.categoryList}"
             app:layout_constraintBottom_toTopOf="@+id/linearLayout"
             app:layout_constraintTop_toTopOf="parent"

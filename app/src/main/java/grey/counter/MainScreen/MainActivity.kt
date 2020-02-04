@@ -3,8 +3,6 @@ package grey.counter.MainScreen
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.widget.TabHost
-import com.google.android.material.tabs.TabLayout
 import androidx.viewpager.widget.ViewPager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -19,7 +17,7 @@ import grey.counter.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var listViewModel: CategoryListViewModel
+    private lateinit var categoryListVM: CategoryListViewModel
     private lateinit var binding: ActivityMainBinding
 
     override fun onPause() {
@@ -34,26 +32,30 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.d("RV"," activity onCreate")
-        listViewModel = ViewModelProviders.of(this).get(CategoryListViewModel::class.java)
-        listViewModel.newCategoryEvent.observe(this, Observer{
+        categoryListVM = ViewModelProviders.of(this).get(CategoryListViewModel::class.java)
+        categoryListVM.newCategoryEvent.observe(this, Observer{
             if(it==true){
                 addNewCategory()
             }
         })
-        listViewModel.openCategoryEvent.observe(this, Observer {
+        categoryListVM.openCategoryEvent.observe(this, Observer {
             openCategory(it)
         })
-        listViewModel.openDayListEvent.observe(this, Observer {
+        categoryListVM.openDayListEvent.observe(this, Observer {
             openDayList(it)
         })
         val sectionsPagerAdapter =
             SectionsPagerAdapter(this, supportFragmentManager)
+
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-        binding.viewModel=listViewModel
-        binding.tabs.setupWithViewPager(binding.viewPager)
-        binding.lifecycleOwner =this
-        binding.pageNum=binding.viewPager.currentItem
-        binding.viewPager.adapter=sectionsPagerAdapter
+        with(binding){
+            viewModel = categoryListVM
+            tabs.setupWithViewPager(viewPager)
+            pageNum = viewPager.currentItem
+            viewPager.adapter = sectionsPagerAdapter
+        }
+
+        binding.lifecycleOwner = this
         binding.viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             override fun onPageSelected(position: Int) {
                 binding.pageNum = position
@@ -76,14 +78,14 @@ class MainActivity : AppCompatActivity() {
     fun addNewCategory() {
         val intent = Intent(this, CategoryActivity::class.java)
         Log.d("RV","newCat")
-        listViewModel.resultHandler()
+//        categoryListVM.resultHandler()
         startActivity(intent)
     }
     fun openCategory(id: Int) {
         val intent = Intent(this, CategoryActivity::class.java)
         intent.putExtra("id", id)
         Log.d("RV","OpenCat putExtra ${id}")
-        listViewModel.resultHandler()
+//        categoryListVM.resultHandler()
         startActivity(intent)
     }
     fun openDayList(i: Int){
