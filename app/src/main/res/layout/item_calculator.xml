@@ -8,14 +8,16 @@
             name="category"
             type="grey.counter.source.Category" />
         <variable
-            name="listener"
+            name="listenerPositive"
+            type="grey.counter.Category.ItemClickListener"/>
+        <variable
+            name="listenerNegative"
             type="grey.counter.Category.ItemClickListener"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="@{()->listener.onClick()}">
+        android:layout_height="wrap_content">
 
         <TextView
             android:id="@+id/calcCatName"
@@ -39,7 +41,8 @@
             android:contentDescription="TODO"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@android:drawable/ic_delete" />
+            app:srcCompat="@android:drawable/ic_delete"
+            android:onClick="@{()->listenerNegative.onClick()}"/>
 
         <ImageButton
             android:id="@+id/posBut"
@@ -49,7 +52,8 @@
             android:layout_marginEnd="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@android:drawable/ic_input_add" />
+            app:srcCompat="@android:drawable/ic_input_add"
+            android:onClick="@{()->listenerPositive.onClick()}"/>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

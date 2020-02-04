@@ -24,14 +24,14 @@ class CategoryViewModel: ViewModel() {
 
     fun start(id: Int){
         if(id>=0) {
-            updateCategory(id)
+            showCategory(id)
         }else{
 
             return
         }
     }
 
-    private fun updateCategory(id: Int){
+    private fun showCategory(id: Int){
         _category.value=CategoryLocalDataSource.getCategory(id)
         name.value = category.value?.name
         coast.value = category.value?.coast.toString()
@@ -41,7 +41,7 @@ class CategoryViewModel: ViewModel() {
 
         if(category.value!=null) {
             category.value?.name = name.value.toString()
-            category.value?.coast = Integer.parseInt(coast.value.toString())
+            category.value?.coast = Integer.parseInt(coast.value!!)
             Log.d("RV","edit ${category.value?.id}")
             CategoryLocalDataSource.editCategory(category.value!!)
         }else{
@@ -52,7 +52,7 @@ class CategoryViewModel: ViewModel() {
             Log.d("RV","add ${category.value?.id}")
             CategoryLocalDataSource.addCategory(category.value!!)
         }
-        updateCategory(category.value!!.id!!)
+        showCategory(category.value!!.id!!)
     }
     fun deleteCategory(){
 

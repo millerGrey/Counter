@@ -36,23 +36,25 @@ class CategoryFragment: Fragment() {
     ): View? {
         Log.d("RV","frag onCreateView")
         categoryBinding = FragmentCategoryBinding.inflate(inflater, container, false)
-        categoryBinding.viewModel = categoryViewModel
-        categoryBinding.lifecycleOwner = requireActivity()
 
-        categoryBinding.fabDone.setOnClickListener{
+        with(categoryBinding){
+            viewModel = categoryViewModel
+            lifecycleOwner = requireActivity()
+            fabDone.setOnClickListener{
 
-            categoryBinding.viewModel?.saveCategory()
-            requireActivity().finish()
-        }
-        categoryBinding.deleteButton.setOnClickListener(){
-            categoryBinding.viewModel?.deleteCategory()
-            requireActivity().finish()
+                viewModel?.saveCategory()
+                requireActivity().finish()
+            }
+            fabDelete.setOnClickListener(){
+                viewModel?.deleteCategory()
+                requireActivity().finish()
+            }
         }
         return categoryBinding.root
     }
 
 
-    fun newInstance(id: Int):CategoryFragment=CategoryFragment().apply{
+    fun newInstance(id: Int): CategoryFragment = CategoryFragment().apply{
         arguments = Bundle().apply{
             putInt(ARG_ID,id)
         }

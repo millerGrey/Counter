@@ -7,6 +7,8 @@ import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import grey.counter.source.Category
 import grey.counter.source.CategoryLocalDataSource
+import grey.counter.source.Note
+import java.util.*
 
 class CategoryListViewModel(
 //    private val taskDataSource: CategoryDataSource
@@ -28,6 +30,10 @@ class CategoryListViewModel(
     val openDayListEvent: LiveData<Int>
         get() =  _openDayListEvent
 
+    private var _note = MutableLiveData<Note>()
+    val note: LiveData<Note>
+        get()  = _note
+
     val isEmpty: LiveData<Boolean> = Transformations.map(_categoryList) {
        it.isEmpty()
     }
@@ -35,7 +41,7 @@ class CategoryListViewModel(
 
     init{
        refreshCategoryList()
-//        _categoryList.value = CategoryLocalDataSource.getAllCategories()
+        _note.value = CategoryLocalDataSource.getNote(Date())
     }
 
 
@@ -51,10 +57,27 @@ class CategoryListViewModel(
         _newCategoryEvent.value = true
         Log.d("RV","new cat")
     }
-//    fun resultHandler(){
-//        _newCategoryEvent.value =false
-//    }
     fun openDayList(){
         _openDayListEvent.value = 1
     }
+
+    fun updateResult(){
+
+    }
+
+    fun pressPositive(id: Int){
+        var c = CategoryLocalDataSource.getCategory(id).coast
+        _note.value?.let{
+            it.res = it.res + c
+        }
+        Log.d("RV","res = ${_note.value?.res}")
+    }
+    fun pressNegative(id: Int){
+        var c = CategoryLocalDataSource.getCategory(id).coast
+        _note.value?.let{
+            it.res = it.res - c
+        }
+        Log.d("RV","res = ${_note.value?.res}")
+    }
+
 }

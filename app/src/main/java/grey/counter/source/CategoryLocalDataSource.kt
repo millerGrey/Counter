@@ -1,16 +1,12 @@
 package grey.counter.source
 
+import java.util.*
+
 object CategoryLocalDataSource : CategoryDataSource {
 
-//    private var list = listOf<Category>(
-//        Category(
-//            0,
-//            "маршрутка",
-//            45
-//        ),
-//        Category(1, "электричка", 46)
-//    ).toMutableList()//emptyList<Category>().toMutableList()
+
     private var list = emptyList<Category>().toMutableList()
+    private var note : Note = Note()
     override fun getAllCategories(): List<Category> {
 
         return list
@@ -30,5 +26,9 @@ object CategoryLocalDataSource : CategoryDataSource {
 
     override fun editCategory(cat: Category) {
         list[cat.id] = cat
+    }
+
+    override fun getNote(date: Date): Note {
+        return note
     }
 }
