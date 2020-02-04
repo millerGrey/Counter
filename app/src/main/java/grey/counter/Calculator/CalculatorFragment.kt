@@ -27,7 +27,6 @@ class CalculatorFragment: Fragment() {
 
 
         val vm = ViewModelProviders.of(requireActivity()).get(CategoryListViewModel::class.java)
-        val calcVm = ViewModelProviders.of(requireActivity()).get(CategoryViewModel::class.java)
         val binding = FragmentCalculatorBinding.inflate(inflater,container,false)
         val adapter = CategoryListAdapter(R.layout.item_calculator, vm)
 
@@ -37,7 +36,7 @@ class CalculatorFragment: Fragment() {
             calcRecycler.layoutManager = LinearLayoutManager(requireActivity())
             lifecycleOwner = requireActivity()
         }
-//        var v = inflater.inflate(R.layout.fragment_calculator, container, false)
+
 
         return binding.root
     }

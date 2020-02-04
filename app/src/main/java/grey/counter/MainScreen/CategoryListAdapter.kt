@@ -35,7 +35,7 @@ class CategoryListAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-
+        Log.d("RV","onBindVH")
         holder.bind(list[position], categoryListViewModel!!)
     }
 
@@ -45,8 +45,6 @@ class CategoryListAdapter(
     }
 
     fun refreshList(lst: List<Category>){
-        Log.d("RV","oldList $list")
-        Log.d("RV","newList $lst")
         list = lst
         notifyDataSetChanged()
     }
@@ -56,13 +54,24 @@ class CategoryListAdapter(
         fun bind(list: Category, viewModel: CategoryListViewModel) {
             val userActionListener = object : ItemClickListener {
                 override fun onClick() {
-                    Log.d("RV", "+press ${layoutPosition}")
                     viewModel.openCategory(layoutPosition)
+                }
+            }
+            val userPosList = object : ItemClickListener {
+                override fun onClick() {
+                    viewModel.pressPositive(layoutPosition)
+                }
+            }
+            val userNegList = object : ItemClickListener {
+                override fun onClick() {
+                    viewModel.pressNegative(layoutPosition)
                 }
             }
             binding.apply {
                 setVariable(BR.category,list)
                 setVariable(BR.listener,userActionListener)
+                setVariable(BR.listenerPositive,userPosList)
+                setVariable(BR.listenerNegative,userNegList)
                 executePendingBindings()
             }
         }

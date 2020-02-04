@@ -27,7 +27,7 @@ object IconBindingAdapter {
             0->{
                 fab.setImageResource(R.drawable.ic_add_black_24dp)
                 fab.setOnClickListener{
-                    vm.newCategory()
+                    vm.createCategory()
                 }
             }
             1-> {

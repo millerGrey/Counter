@@ -2,7 +2,6 @@ package grey.counter.Calculator
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import grey.counter.Category.CategoryFragment
 import grey.counter.R
 
 class CalculatorActivity: AppCompatActivity() {

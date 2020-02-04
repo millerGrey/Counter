@@ -24,7 +24,7 @@ class CategoryListFragment: Fragment() {
    override fun onResume() {
        super.onResume()
        Log.d("RV","resume getList1 ${categoryListViewModel.categoryList.value}")
-        categoryListViewModel.refreshCat()
+        categoryListViewModel.refreshCategoryList()
     }
 
 
