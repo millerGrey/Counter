@@ -31,4 +31,16 @@ object CategoryLocalDataSource : CategoryDataSource {
     override fun getNote(date: Date): Note {
         return note
     }
+
+    override fun addNote(note: Note) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun editNote(note: Note) {
+        this.note = note
+    }
+
+    override fun deleteNote(note: Note) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
 }

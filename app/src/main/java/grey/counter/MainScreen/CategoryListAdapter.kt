@@ -1,6 +1,5 @@
 package grey.counter.MainScreen
 
-import android.text.Layout
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -10,9 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import grey.counter.BR
 import grey.counter.Category.ItemClickListener
 import grey.counter.CategoryListViewModel
-import grey.counter.databinding.ItemCategoryBinding
 import grey.counter.source.Category
-import java.util.zip.Inflater
 
 class CategoryListAdapter(
     private val itemLayoutId: Int,
@@ -59,12 +56,12 @@ class CategoryListAdapter(
             }
             val userPosList = object : ItemClickListener {
                 override fun onClick() {
-                    viewModel.pressPositive(layoutPosition)
+                    viewModel.onPressPositive(layoutPosition)
                 }
             }
             val userNegList = object : ItemClickListener {
                 override fun onClick() {
-                    viewModel.pressNegative(layoutPosition)
+                    viewModel.onPressNegative(layoutPosition)
                 }
             }
             binding.apply {

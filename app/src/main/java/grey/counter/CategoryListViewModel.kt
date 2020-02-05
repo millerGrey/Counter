@@ -30,18 +30,17 @@ class CategoryListViewModel(
     val openDayListEvent: LiveData<Int>
         get() =  _openDayListEvent
 
-    private var _note = MutableLiveData<Note>()
-    val note: LiveData<Note>
-        get()  = _note
-
     val isEmpty: LiveData<Boolean> = Transformations.map(_categoryList) {
        it.isEmpty()
     }
 
+    private var _res = MutableLiveData<Int>(0)
+    val res: LiveData<Int>
+        get() = _res
 
     init{
        refreshCategoryList()
-        _note.value = CategoryLocalDataSource.getNote(Date())
+        _res.value = CategoryLocalDataSource.getNote(Date()).res
     }
 
 
@@ -61,23 +60,26 @@ class CategoryListViewModel(
         _openDayListEvent.value = 1
     }
 
-    fun updateResult(){
+    fun onPressPositive(id: Int){
+        var c = CategoryLocalDataSource.getCategory(id).coast
+        _res.value = _res.value?.plus(c)
 
+        Log.d("RV","res = ${_res.value}")
+    }
+    fun onPressNegative(id: Int){
+        var c = CategoryLocalDataSource.getCategory(id).coast
+        _res.value = _res.value?.minus(c)
+
+        Log.d("RV","res = ${_res.value}")
     }
 
-    fun pressPositive(id: Int){
-        var c = CategoryLocalDataSource.getCategory(id).coast
-        _note.value?.let{
-            it.res = it.res + c
-        }
-        Log.d("RV","res = ${_note.value?.res}")
-    }
-    fun pressNegative(id: Int){
-        var c = CategoryLocalDataSource.getCategory(id).coast
-        _note.value?.let{
-            it.res = it.res - c
-        }
-        Log.d("RV","res = ${_note.value?.res}")
+    fun onPressSave(){
+
+        var note = Note()
+        _res.value?.let{note.res = it}
+        note.date = Date()
+        CategoryLocalDataSource.editNote(note)
+        Log.d("RV","save res = ${_res.value}")
     }
 
 }
