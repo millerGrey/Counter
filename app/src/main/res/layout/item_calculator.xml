@@ -9,10 +9,10 @@
             type="grey.counter.source.Category" />
         <variable
             name="listenerPositive"
-            type="grey.counter.Category.ItemClickListener"/>
+            type="grey.counter.ItemClickListener"/>
         <variable
             name="listenerNegative"
-            type="grey.counter.Category.ItemClickListener"/>
+            type="grey.counter.ItemClickListener"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

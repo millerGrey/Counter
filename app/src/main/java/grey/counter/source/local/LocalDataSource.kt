@@ -1,9 +1,12 @@
-package grey.counter.source
+package grey.counter.source.local
 
 import grey.counter.App
+import grey.counter.source.Category
+import grey.counter.source.CategoryDataSource
+import grey.counter.source.Note
 import java.util.*
 
-object CategoryLocalDataSource : CategoryDataSource {
+object LocalDataSource : CategoryDataSource {
 
     private var note : Note = Note()
 
@@ -38,7 +41,7 @@ object CategoryLocalDataSource : CategoryDataSource {
     }
 
     override fun editNote(note: Note) {
-        this.note = note
+        LocalDataSource.note = note
     }
 
     override fun deleteNote(note: Note) {

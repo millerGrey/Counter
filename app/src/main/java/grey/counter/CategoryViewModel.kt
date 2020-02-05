@@ -5,7 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import grey.counter.source.Category
-import grey.counter.source.CategoryLocalDataSource
+import grey.counter.source.local.LocalDataSource
 
 class CategoryViewModel: ViewModel() {
 
@@ -32,7 +32,7 @@ class CategoryViewModel: ViewModel() {
     }
 
     private fun showCategory(id: Int){
-        _category.value=CategoryLocalDataSource.getCategory(id)
+        _category.value= LocalDataSource.getCategory(id)
         name.value = category.value?.name
         coast.value = category.value?.coast.toString()
     }
@@ -43,20 +43,20 @@ class CategoryViewModel: ViewModel() {
             category.value?.name = name.value.toString()
             category.value?.coast = Integer.parseInt(coast.value!!)
             Log.d("RV","edit ${category.value?.id}")
-            CategoryLocalDataSource.editCategory(category.value!!)
+            LocalDataSource.editCategory(category.value!!)
         }else{
-            val id = CategoryLocalDataSource.getAllCategories().size
+            val id = LocalDataSource.getAllCategories().size
             _category.value = Category(id)
             category.value?.name = name.value?:""
             category.value?.coast = Integer.parseInt(coast.value?:"0")
             Log.d("RV","add ${category.value?.id}")
-            CategoryLocalDataSource.addCategory(category.value!!)
+            LocalDataSource.addCategory(category.value!!)
         }
         showCategory(category.value!!.id!!)
     }
     fun deleteCategory(){
 
-        CategoryLocalDataSource.deleteCategory(category.value!!)
+        LocalDataSource.deleteCategory(category.value!!)
     }
 
 }

@@ -1,4 +1,4 @@
-package grey.counter.Category
+package grey.counter
 
 interface ItemClickListener {
     fun onClick()

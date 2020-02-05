@@ -6,14 +6,16 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import grey.counter.source.Category
-import grey.counter.source.CategoryLocalDataSource
+import grey.counter.source.local.LocalDataSource
 import grey.counter.source.Note
+import grey.counter.source.Repository
 import java.util.*
 
 class CategoryListViewModel(
 //    private val taskDataSource: CategoryDataSource
 ): ViewModel() {
 
+    private val repo = Repository()
     private var _categoryList = MutableLiveData<List<Category>>()
     val categoryList: LiveData<List<Category>>
         get() =  _categoryList
@@ -40,13 +42,13 @@ class CategoryListViewModel(
 
     init{
        refreshCategoryList()
-        _res.value = CategoryLocalDataSource.getNote(Date()).res
+        _res.value = LocalDataSource.getNote(Date()).res
     }
 
 
     fun refreshCategoryList() {
         Log.d("RV","vieModel refreshList")
-        _categoryList.value = CategoryLocalDataSource.getAllCategories()
+        _categoryList.value = LocalDataSource.getAllCategories()
     }
 
     fun openCategory(id: Int){
@@ -61,13 +63,13 @@ class CategoryListViewModel(
     }
 
     fun onPressPositive(pos: Int){
-        var c = CategoryLocalDataSource.getCategory(pos + 1).coast
+        var c = LocalDataSource.getCategory(pos + 1).coast
         _res.value = _res.value?.plus(c)
 
         Log.d("RV","res = ${_res.value}")
     }
     fun onPressNegative(pos: Int){
-        var c = CategoryLocalDataSource.getCategory(pos + 1).coast
+        var c = LocalDataSource.getCategory(pos + 1).coast
         _res.value = _res.value?.minus(c)
 
         Log.d("RV","res = ${_res.value}")
@@ -78,7 +80,7 @@ class CategoryListViewModel(
         var note = Note()
         _res.value?.let{note.res = it}
         note.date = Date()
-        CategoryLocalDataSource.editNote(note)
+        LocalDataSource.editNote(note)
         Log.d("RV","save res = ${_res.value}")
     }
 

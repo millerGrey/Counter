@@ -7,7 +7,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
 import grey.counter.BR
-import grey.counter.Category.ItemClickListener
+import grey.counter.ItemClickListener
 import grey.counter.CategoryListViewModel
 import grey.counter.source.Category
 
