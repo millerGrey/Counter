@@ -1,22 +1,38 @@
 @startuml
 
-class MainActivity
-class CategoryListFragment
-class CalendarFragment
-class CategoryListViewModel
-class SectionPagerAdapter
-class CategoryActivity
-class CategoryFragment
+
+
+class CategoryListViewModel{
+    categoryList: LiveData<List<Category>>
+}
+package MainScreen{
+    class MainActivity
+    class CategoryListFragment
+    class CalendarFragment
+    class SectionPagerAdapter
+}
+package Category{
+    class CategoryActivity
+    class CategoryFragment
+}
+
+
 class CalculatorActivity
 class CalculatorFragment
 class CategoryListAdapter
-class Category
+class Category{
+    id: Int
+    name: String
+    coast: Int
+}
 Interface ItemClickListener
 class CategoryViewModel
+class Note
+Interface CategoryDataSource
+Object CategoryLocalDataSource
 
 SectionPagerAdapter <|-- MainActivity
 CategoryListViewModel <|-- MainActivity
-CalendarFragment <|-- SectionPagerAdapter
 CategoryListFragment <|-- SectionPagerAdapter
 CategoryActivity <|-- MainActivity
 CalculatorActivity <|-- MainActivity
@@ -29,14 +45,14 @@ CategoryFragment <|-- CategoryActivity
 CategoryViewModel <|-- CategoryFragment
 Category <|-- CategoryViewModel
 Category <|-- CategoryListViewModel
+Note <|-- CategoryListViewModel
 CalculatorFragment <|-- CalculatorActivity
 CategoryListAdapter <|--CalculatorFragment
 CategoryListViewModel <|-- CalculatorFragment
-CategoryViewModel <|-- CalculatorFragment
+CalendarFragment <|-- SectionPagerAdapter
+CategoryDataSource <|-- CategoryLocalDataSource
+
+
 @enduml
 
 
-
-annotation SuppressWarnings
-
-@enduml

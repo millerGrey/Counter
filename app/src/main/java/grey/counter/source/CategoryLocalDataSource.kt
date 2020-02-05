@@ -1,31 +1,32 @@
 package grey.counter.source
 
+import grey.counter.App
 import java.util.*
 
 object CategoryLocalDataSource : CategoryDataSource {
 
-
-    private var list = emptyList<Category>().toMutableList()
     private var note : Note = Note()
+
+    val catDao = App.instance.dataBase.catDao()
     override fun getAllCategories(): List<Category> {
 
-        return list
+        return catDao.getAllCategories()
     }
 
     override fun getCategory(id: Int): Category {
-        return list[id]
+        return catDao.getCategoryById(id)
     }
 
     override fun addCategory(cat: Category) {
-        list.add(cat)
+        catDao.insert(cat)
     }
 
     override fun deleteCategory(cat: Category) {
-        list.remove(cat)
+        catDao.delete(cat)
     }
 
     override fun editCategory(cat: Category) {
-        list[cat.id] = cat
+        catDao.update(cat)
     }
 
     override fun getNote(date: Date): Note {

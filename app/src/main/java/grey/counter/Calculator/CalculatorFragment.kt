@@ -8,14 +8,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import grey.counter.CategoryListViewModel
-import grey.counter.CategoryViewModel
 import grey.counter.MainScreen.CategoryListAdapter
 import grey.counter.R
 import grey.counter.databinding.FragmentCalculatorBinding
-import grey.counter.databinding.FragmentCategoryBinding
-import java.util.zip.Inflater
 
 class CalculatorFragment: Fragment() {
     override fun onCreateView(

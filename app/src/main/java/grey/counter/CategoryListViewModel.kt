@@ -60,14 +60,14 @@ class CategoryListViewModel(
         _openDayListEvent.value = 1
     }
 
-    fun onPressPositive(id: Int){
-        var c = CategoryLocalDataSource.getCategory(id).coast
+    fun onPressPositive(pos: Int){
+        var c = CategoryLocalDataSource.getCategory(pos + 1).coast
         _res.value = _res.value?.plus(c)
 
         Log.d("RV","res = ${_res.value}")
     }
-    fun onPressNegative(id: Int){
-        var c = CategoryLocalDataSource.getCategory(id).coast
+    fun onPressNegative(pos: Int){
+        var c = CategoryLocalDataSource.getCategory(pos + 1).coast
         _res.value = _res.value?.minus(c)
 
         Log.d("RV","res = ${_res.value}")
