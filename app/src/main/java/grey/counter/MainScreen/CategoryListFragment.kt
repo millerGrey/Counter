@@ -21,9 +21,9 @@ class CategoryListFragment: Fragment() {
 
     private lateinit var viewBinding:FragmentCategoryListBinding
 
-   override fun onResume() {
+    override fun onResume() {
        super.onResume()
-       Log.d("RV","resume getList1 ${categoryListViewModel.categoryList.value}")
+       Log.d("RV","CategoryListFragment onResume getList1 ${categoryListViewModel.categoryList.value}")
         categoryListViewModel.refreshCategoryList()
     }
 
@@ -33,11 +33,11 @@ class CategoryListFragment: Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        Log.d("RV","listfrag onCreateView")
+        Log.d("RV","CategoryListFragment onCreateView")
         viewBinding = FragmentCategoryListBinding.inflate(inflater, container, false)
         categoryListViewModel = ViewModelProviders.of(requireActivity()).get(CategoryListViewModel::class.java)
 
-        val adapter = CategoryListAdapter(R.layout.item_category, categoryListViewModel)
+        val adapter = CategoryListAdapter(R.layout.item_category, categoryListViewModel, null)
 
         viewBinding.apply{
             viewModel = categoryListViewModel

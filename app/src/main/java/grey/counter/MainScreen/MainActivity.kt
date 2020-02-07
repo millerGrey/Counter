@@ -22,16 +22,16 @@ class MainActivity : AppCompatActivity() {
 
     override fun onPause() {
         super.onPause()
-        Log.d("RV"," activity onPause")
+        Log.d("RV"," MainActivity onPause")
     }
 
     override fun onResume() {
         super.onResume()
-        Log.d("RV"," activity onResume")
+        Log.d("RV"," MainActivity onResume")
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Log.d("RV"," activity onCreate")
+        Log.d("RV"," MainActivity onCreate")
         categoryListVM = ViewModelProviders.of(this).get(CategoryListViewModel::class.java)
         categoryListVM.newCategoryEvent.observe(this, Observer{
             if(it==true){
@@ -78,19 +78,17 @@ class MainActivity : AppCompatActivity() {
     fun addNewCategory() {
         val intent = Intent(this, CategoryActivity::class.java)
         Log.d("RV","newCat")
-//        categoryListVM.resultHandler()
         startActivity(intent)
     }
     fun openCategory(id: Int) {
         val intent = Intent(this, CategoryActivity::class.java)
         intent.putExtra("id", id)
         Log.d("RV","OpenCat putExtra ${id}")
-//        categoryListVM.resultHandler()
         startActivity(intent)
     }
-    fun openDayList(i: Int){
-
-        startActivity(Intent(this,CalculatorActivity::class.java))
+    fun openDayList(date: String){
+        val intent = Intent(this,CalculatorActivity::class.java).putExtra("date", date)
+        startActivity(intent)
     }
 
 

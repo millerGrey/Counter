@@ -9,5 +9,7 @@
     <string name="enterName">Введите название</string>
     <string name="coast">Стоимость</string>
     <string name="enterCoast">Введите стоимость</string>
+
+    <string name="noExpence">Ура! Расходов нет!</string>
     <string name="save">Сохранить</string>
 </resources>

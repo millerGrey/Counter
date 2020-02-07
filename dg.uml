@@ -25,6 +25,7 @@ package ViewModel{
     class CategoryListViewModel{
         categoryList: LiveData<List<Category>>
     }
+    class NoteViewModel
 }
 package Model{
     class Category{
@@ -38,9 +39,10 @@ package Model{
     }
 }
 
-package Local{
+package Local <<Database>>{
     abstract class LocalDB
     Interface CategoryDao
+    Interface NoteDao
     Object LocalDataSource
 }
 class Repository
@@ -81,18 +83,28 @@ CategoryFragment <|-- CategoryActivity
 CategoryViewModel <|-- CategoryFragment
 Category <|-- CategoryViewModel
 Category <|-- CategoryListViewModel
-Note <|-- CategoryListViewModel
+
+Note <|-- NoteViewModel
 CalculatorFragment <|-- CalculatorActivity
-CategoryListAdapter <|--CalculatorFragment
+CategoryListAdapter <|-- CalculatorFragment
 CategoryListViewModel <|-- CalculatorFragment
+
+CategoryListViewModel <|-- CalendarFragment
 CalendarFragment <|-- SectionPagerAdapter
 LocalDataSource --|> DataSource
-CategoryDao <. LocalDataSource
+CategoryDao <.. LocalDataSource
+NoteDao <.. LocalDataSource
 LocalDB -|> CategoryDao
 LocalDB --|> Category
+LocalDB --|> Note
+LocalDB --|> NoteDao
 CategoryDao --|> Category
+NoteDao ---|> Note
 Repository <|-- CategoryListViewModel
 DataSource <|-- Repository
+
+NoteViewModel <|-- CalculatorFragment
+NoteViewModel <|-- CalendarFragment
 @enduml
 
 

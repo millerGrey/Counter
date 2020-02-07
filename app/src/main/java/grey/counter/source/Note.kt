@@ -1,8 +1,16 @@
 package grey.counter.source
 
-import java.util.*
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.Index
+import androidx.room.PrimaryKey
+
+@Entity(tableName = "NoteTable")
+
+//        indices = [Index(value = "date", unique = true)])
 
 data class Note (
-    var date: Date = Date(),
+    @PrimaryKey
+    var date: String =" ",
     var res: Int = 0
 )

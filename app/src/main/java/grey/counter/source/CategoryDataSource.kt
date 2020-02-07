@@ -8,7 +8,7 @@ interface CategoryDataSource {
     fun addCategory(cat: Category)
     fun deleteCategory(cat: Category)
     fun editCategory(cat: Category)
-    fun getNote(date: Date): Note
+    fun getNote(date: String): Note?
     fun addNote(note: Note)
     fun editNote(note: Note)
     fun deleteNote(note: Note)

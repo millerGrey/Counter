@@ -8,9 +8,10 @@ import java.util.*
 
 object LocalDataSource : CategoryDataSource {
 
-    private var note : Note = Note()
+//    private var note : Note = Note()
 
     val catDao = App.instance.dataBase.catDao()
+    val noteDao = App.instance.dataBase.noteDao()
     override fun getAllCategories(): List<Category> {
 
         return catDao.getAllCategories()
@@ -32,19 +33,19 @@ object LocalDataSource : CategoryDataSource {
         catDao.update(cat)
     }
 
-    override fun getNote(date: Date): Note {
-        return note
+    override fun getNote(date: String): Note? {
+        return noteDao.getNote(date)
     }
 
     override fun addNote(note: Note) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return noteDao.insert(note)
     }
 
     override fun editNote(note: Note) {
-        LocalDataSource.note = note
+        return noteDao.update(note)
     }
 
     override fun deleteNote(note: Note) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return noteDao.delete(note)
     }
 }

@@ -11,7 +11,7 @@ class CategoryActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_category)
         val id = intent.getIntExtra("id",-1)
-        Log.d("RV","getExtra ${id}")
+        Log.d("RV", "CalculatorActivity created with id = $id")
         if(savedInstanceState==null) {
             val f = CategoryFragment().newInstance(id)
 

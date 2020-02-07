@@ -9,11 +9,13 @@ import androidx.recyclerview.widget.RecyclerView
 import grey.counter.BR
 import grey.counter.ItemClickListener
 import grey.counter.CategoryListViewModel
+import grey.counter.NoteViewModel
 import grey.counter.source.Category
 
 class CategoryListAdapter(
     private val itemLayoutId: Int,
-    private val categoryListViewModel: CategoryListViewModel?
+    private val categoryListViewModel: CategoryListViewModel?,
+    private val noteVM: NoteViewModel?
     ) : RecyclerView.Adapter<CategoryListAdapter.ViewHolder>() {
     private var list: List<Category> = emptyList()
     private lateinit var itemBinding: ViewDataBinding
@@ -33,7 +35,7 @@ class CategoryListAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         Log.d("RV","onBindVH")
-        holder.bind(list[position], categoryListViewModel!!)
+        holder.bind(list[position], categoryListViewModel!!, noteVM)
     }
 
 
@@ -48,20 +50,20 @@ class CategoryListAdapter(
 
 
     class ViewHolder(private var binding: ViewDataBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(list: Category, viewModel: CategoryListViewModel) {
+        fun bind(list: Category, listVM: CategoryListViewModel, noteVM: NoteViewModel?) {
             val userActionListener = object : ItemClickListener {
                 override fun onClick() {
-                    viewModel.openCategory(layoutPosition)
+                    listVM.openCategory(layoutPosition)
                 }
             }
             val userPosList = object : ItemClickListener {
                 override fun onClick() {
-                    viewModel.onPressPositive(layoutPosition)
+                    noteVM?.onPressPositive(layoutPosition)
                 }
             }
             val userNegList = object : ItemClickListener {
                 override fun onClick() {
-                    viewModel.onPressNegative(layoutPosition)
+                    noteVM?.onPressNegative(layoutPosition)
                 }
             }
             binding.apply {
