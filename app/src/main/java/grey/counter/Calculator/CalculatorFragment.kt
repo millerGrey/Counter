@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import grey.counter.CategoryListViewModel
@@ -24,6 +25,11 @@ class CalculatorFragment: Fragment() {
         date?.let{
             noteVM.start(date)
         }
+        noteVM.onSaveEvent.observe(this, Observer{
+            if(it==true){
+                requireActivity().finish()
+            }
+        })
     }
 
     override fun onCreateView(
@@ -38,7 +44,7 @@ class CalculatorFragment: Fragment() {
 
         val binding = FragmentCalculatorBinding.inflate(inflater,container,false)
         val adapter = CategoryListAdapter(R.layout.item_calculator, listVM, noteVM)
-
+        //TODO settings for textView width
         binding.apply{
             listViewModel = listVM
             noteViewModel = noteVM

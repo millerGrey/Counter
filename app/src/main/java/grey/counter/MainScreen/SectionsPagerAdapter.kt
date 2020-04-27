@@ -4,10 +4,7 @@ import android.content.Context
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import grey.counter.R
-import java.lang.Exception
 
 private val TAB_TITLES = arrayOf(
     R.string.expences,

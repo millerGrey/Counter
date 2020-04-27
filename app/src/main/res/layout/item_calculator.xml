@@ -26,6 +26,8 @@
             android:text="@{category.name}"
             android:textColor="@android:color/primary_text_light"
             android:textSize="24sp"
+
+            android:ellipsize="end"
             app:layout_constraintBottom_toBottomOf="@+id/negBut"
             app:layout_constraintEnd_toStartOf="@+id/posBut"
             app:layout_constraintStart_toEndOf="@+id/negBut"

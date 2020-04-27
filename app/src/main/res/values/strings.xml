@@ -12,4 +12,5 @@
 
     <string name="noExpence">Ура! Расходов нет!</string>
     <string name="save">Сохранить</string>
+    <string name="formatRub">%d р.</string>
 </resources>

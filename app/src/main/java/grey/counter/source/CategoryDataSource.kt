@@ -1,7 +1,5 @@
 package grey.counter.source
 
-import java.util.*
-
 interface CategoryDataSource {
     fun getAllCategories(): List<Category>
     fun getCategory(id: Int): Category

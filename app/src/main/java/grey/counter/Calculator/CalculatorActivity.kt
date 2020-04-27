@@ -3,7 +3,6 @@ package grey.counter.Calculator
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.os.bundleOf
 import grey.counter.R
 
 class CalculatorActivity: AppCompatActivity() {

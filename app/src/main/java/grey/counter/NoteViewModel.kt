@@ -19,7 +19,9 @@ class NoteViewModel: ViewModel() {
     val date: LiveData<String>
         get() = _date
 
-
+    private val _onSaveEvent = MutableLiveData<Boolean>()
+    val onSaveEvent: LiveData<Boolean>
+        get() = _onSaveEvent
 
     fun start(date: String){
         _date.value = date
@@ -39,14 +41,14 @@ class NoteViewModel: ViewModel() {
      * Методы для экрана рассчетов
      *
      */
-    fun onPressPositive(pos: Int){
-        var c = LocalDataSource.getCategory(pos).coast
+    fun onPressPositive(id: Int){
+        var c = LocalDataSource.getCategory(id).coast
         _res.value = _res.value?.plus(c)
 
         Log.d("RV","res = ${_res.value}")
     }
-    fun onPressNegative(pos: Int){
-        var c = LocalDataSource.getCategory(pos).coast
+    fun onPressNegative(id: Int){
+        var c = LocalDataSource.getCategory(id).coast
         _res.value = _res.value?.minus(c)
 
         Log.d("RV","res = ${_res.value}")
@@ -64,6 +66,7 @@ class NoteViewModel: ViewModel() {
             LocalDataSource.editNote(note)
         }
         Log.d("RV","save res = ${_res.value}")
+        _onSaveEvent.value = true
     }
     /**-------------------------------------------------------------------------*/
 

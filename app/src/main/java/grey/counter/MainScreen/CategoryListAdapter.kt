@@ -7,8 +7,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
 import grey.counter.BR
-import grey.counter.ItemClickListener
 import grey.counter.CategoryListViewModel
+import grey.counter.ItemClickListener
 import grey.counter.NoteViewModel
 import grey.counter.source.Category
 
@@ -50,24 +50,24 @@ class CategoryListAdapter(
 
 
     class ViewHolder(private var binding: ViewDataBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(list: Category, listVM: CategoryListViewModel, noteVM: NoteViewModel?) {
+        fun bind(item: Category, listVM: CategoryListViewModel, noteVM: NoteViewModel?) {
             val userActionListener = object : ItemClickListener {
                 override fun onClick() {
-                    listVM.openCategory(layoutPosition)
+                    listVM.openCategory(item.id)
                 }
             }
             val userPosList = object : ItemClickListener {
                 override fun onClick() {
-                    noteVM?.onPressPositive(layoutPosition)
+                    noteVM?.onPressPositive(item.id)
                 }
             }
             val userNegList = object : ItemClickListener {
                 override fun onClick() {
-                    noteVM?.onPressNegative(layoutPosition)
+                    noteVM?.onPressNegative(item.id)
                 }
             }
             binding.apply {
-                setVariable(BR.category,list)
+                setVariable(BR.category,item)
                 setVariable(BR.listener,userActionListener)
                 setVariable(BR.listenerPositive,userPosList)
                 setVariable(BR.listenerNegative,userNegList)
