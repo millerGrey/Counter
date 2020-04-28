@@ -1,5 +1,5 @@
 # Counter
-It is a little app for coast accounting.
+It is a little app for cost accounting.
 
 It was needed for training in kotlin and Android Architecture Components.
 
