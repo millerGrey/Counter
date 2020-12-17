@@ -41,8 +41,8 @@ class CategoryViewModel: ViewModel() {
             LocalDataSource.editCategory(it)
         }?:let{
             val categoryes = LocalDataSource.getAllCategories()
-            val id = categoryes[categoryes.size - 1].id + 1
-            val cat = Category(id)
+//            val id = categoryes[categoryes.size - 1].id + 1
+            val cat = Category()
             cat.name = name.value?:""
             cat.coast = Integer.parseInt(coast.value?:"0")
             _category.value = cat

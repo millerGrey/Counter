@@ -18,16 +18,16 @@ class CategoryListViewModel(
     val categoryList: LiveData<List<Category>>
         get() = _categoryList
 
-    private val _openCategoryEvent = MutableLiveData<Int>()
-    val openCategoryEvent: LiveData<Int>
+    private val _openCategoryEvent = SingleLiveEvent<Int?>()
+    val openCategoryEvent: LiveData<Int?>
         get() = _openCategoryEvent
 
-    private var _newCategoryEvent = MutableLiveData<Boolean>()
-    val newCategoryEvent: LiveData<Boolean>
+    private var _newCategoryEvent = SingleLiveEvent<Boolean?>()
+    val newCategoryEvent: LiveData<Boolean?>
         get() = _newCategoryEvent
 
-    private var _openDayListEvent = MutableLiveData<String>()
-    val openDayListEvent: LiveData<String>
+    private var _openDayListEvent = SingleLiveEvent<String?>()
+    val openDayListEvent: LiveData<String?>
         get() = _openDayListEvent
 
     val isEmpty: LiveData<Boolean> = Transformations.map(_categoryList) {
