@@ -39,10 +39,14 @@ class MainActivity : AppCompatActivity() {
             }
         })
         categoryListVM.openCategoryEvent.observe(this, Observer {
-            openCategory(it)
+            it?.let{
+                openCategory(it)
+            }
         })
         categoryListVM.openDayListEvent.observe(this, Observer {
-            openDayList(it)
+            it?.let{
+                openDayList(it)
+            }
         })
         val sectionsPagerAdapter =
             SectionsPagerAdapter(this, supportFragmentManager)
